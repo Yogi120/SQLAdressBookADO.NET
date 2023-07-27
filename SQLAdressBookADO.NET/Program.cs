@@ -39,6 +39,17 @@ public class Program
                     Method.AddContact(newContact);
 
                     break;
+
+                case 2:
+
+                    Console.Write("Enter id: ");
+                    int Upid = Convert.ToInt32(Console.ReadLine());
+                    Console.Write("Enter Contact Name: ");
+                    string Updatecontact = Console.ReadLine();
+                    Console.Write("Enter email: ");
+                    string Updateemail = Console.ReadLine();
+                    Method.UpdateContact(Updatecontact, Updateemail, Upid);
+                    break;
             }
         }
     }

@@ -47,6 +47,32 @@ namespace SQLAdressBookADO.NET
                 sqlConnection.Close();
             }
         }
+        public void UpdateContact(string Updatecontact, string Updateemail, int id)
+        {
+            try
+            {
+                sqlConnection.Open();
+
+                string updatequery = $"UPDATE Contact SET Email = '{Updateemail}', CName = '{Updatecontact}' WHERE id = '{id}'";
+                SqlCommand updatecommand = new SqlCommand(updatequery, sqlConnection);
+
+                int result = updatecommand.ExecuteNonQuery();
+
+                if (result > 0)
+                {
+                    Console.WriteLine("Contact updated sucessfully");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            finally
+            {
+                sqlConnection.Close();
+            }
+
+        }
     }
 
 }
