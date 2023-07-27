@@ -147,6 +147,49 @@ namespace SQLAdressBookADO.NET
             }
         }
 
+
+        public void SPadddContact(Contact contact)
+        {
+            sqlConnection.Open();
+
+            string query = "SPAddcontact";
+            //SqlTransaction sqlTransaction = sqlConnection.BeginTransacton();
+            SqlTransaction sqlTransaction = sqlConnection.BeginTransaction();
+
+            SqlCommand sqlcmd = new SqlCommand(query, sqlConnection, sqlTransaction);
+            sqlcmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+            sqlcmd.Parameters.AddWithValue("@CName", contact.Name);
+            sqlcmd.Parameters.AddWithValue("@Phone_Number", contact.PhoneNumber);
+            sqlcmd.Parameters.AddWithValue("@Email", contact.Email);
+            sqlcmd.Parameters.AddWithValue("@CState", contact.State);
+            sqlcmd.Parameters.AddWithValue("@City", contact.City);
+            sqlcmd.Parameters.AddWithValue("@Zipcode", contact.ZipCode);
+
+            try
+            {
+                int result = sqlcmd.ExecuteNonQuery();
+                //sqlTransaction.Commit();
+                if (result > 0)
+                {
+                    Console.WriteLine("Contact added sucessfully !!!");
+                }
+
+                else
+                {
+                    Console.WriteLine("FAILED to add contact !!");
+                    sqlConnection.Close();
+                }
+            }
+            catch (Exception)
+            {
+                sqlcmd.Transaction.Rollback();
+                Console.WriteLine("Rollback !!!");
+            }
+
+            sqlConnection.Close();
+        }
+
     }
 
 }

@@ -63,6 +63,37 @@ public class Program
                     int id = int.Parse(Console.ReadLine());
                     Method.DeleteContact(id);
                     break;
+
+                case 5:
+
+                    Console.Write("Name: ");
+                    string spname = Console.ReadLine();
+                    Console.Write("Phone_Nmber: ");
+                    string spphoneNumber = Console.ReadLine();
+                    Console.Write("Email: ");
+                    string spemail = Console.ReadLine();
+                    Console.Write("State: ");
+                    string spstate = Console.ReadLine();
+                    Console.Write("City: ");
+                    string spcity = Console.ReadLine();
+                    Console.Write("Zipcode: ");
+                    string spzipCode = Console.ReadLine();
+
+                    Contact spContact = new Contact(spname, spphoneNumber, spemail, spstate, spcity, spzipCode);
+                    Method.SPadddContact(spContact);
+
+                    break;
+
+
+                case 6:
+
+                    Console.WriteLine("Exiting...");
+                    return;
+
+                default:
+
+                    Console.WriteLine("Enter Valid input!!");
+                    break;
             }
         }
     }
