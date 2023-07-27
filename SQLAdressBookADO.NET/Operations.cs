@@ -118,6 +118,35 @@ namespace SQLAdressBookADO.NET
                 sqlConnection.Close();
             }
         }
+
+        public void DeleteContact(int Id)
+        {
+            try
+            {
+                sqlConnection.Open();
+
+                string deletequery = $"DELETE FROM Contact WHERE Id = {Id}";
+                SqlCommand deletecommand = new SqlCommand(deletequery, sqlConnection);
+
+                int result = deletecommand.ExecuteNonQuery();
+
+                if (result > 0)
+                {
+                    Console.WriteLine("Contact Deleted sucessfully!!");
+                }
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
+
     }
 
 }

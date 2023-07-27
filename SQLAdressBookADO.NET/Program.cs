@@ -56,6 +56,13 @@ public class Program
                     Console.WriteLine("Displaying Contact");
                     Method.Display();
                     break;
+
+                case 4:
+
+                    Console.Write("Enter id: ");
+                    int id = int.Parse(Console.ReadLine());
+                    Method.DeleteContact(id);
+                    break;
             }
         }
     }
