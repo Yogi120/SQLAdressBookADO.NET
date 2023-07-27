@@ -50,6 +50,12 @@ public class Program
                     string Updateemail = Console.ReadLine();
                     Method.UpdateContact(Updatecontact, Updateemail, Upid);
                     break;
+
+                case 3:
+
+                    Console.WriteLine("Displaying Contact");
+                    Method.Display();
+                    break;
             }
         }
     }

@@ -73,6 +73,51 @@ namespace SQLAdressBookADO.NET
             }
 
         }
+
+        public void Display()
+        {
+            try
+            {
+                List<Contact> contactList = new List<Contact>();
+
+                sqlConnection.Open();
+
+                string query = "SELECT * FROM Contact";
+                SqlCommand ViewContact = new SqlCommand(query, sqlConnection);
+
+                SqlDataReader reader = ViewContact.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Contact contact = new Contact()
+                    {
+                        Id = (int)reader["Id"],
+                        Name = (string)reader["CName"],
+                        PhoneNumber = (string)reader["Phone_Number"],
+                        Email = (string)reader["Email"],
+                        State = (string)reader["CState"],
+                        City = (string)reader["City"],
+                        ZipCode = (String)reader["ZipCode"]
+                    };
+
+                    contactList.Add(contact);
+                }
+                foreach (Contact contact in contactList)
+                {
+                    Console.WriteLine($"Id: {contact.Id}\t CName: {contact.Name}\t Phone_Number: {contact.PhoneNumber}\t Email: {contact.PhoneNumber}\t CState: {contact.State}\t City: {contact.City}\t ZipCode: {contact.ZipCode}");
+                }
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
+            finally
+            {
+                sqlConnection.Close();
+            }
+        }
     }
 
 }
