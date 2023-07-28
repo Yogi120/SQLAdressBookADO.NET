@@ -1,4 +1,6 @@
 ﻿using System.Data.SqlClient;
+using System.Reflection.Emit;
+using System.Xml.Linq;
 
 namespace SQLAdressBookADO.NET
 {
@@ -188,6 +190,53 @@ namespace SQLAdressBookADO.NET
             }
 
             sqlConnection.Close();
+        }
+
+        public void SpDisplayContacts()
+        {
+            try 
+            {
+                List<Contact> contacts = new List<Contact>();
+
+                sqlConnection.Open();
+
+                string query = "SpDisplayingContacts";
+
+                SqlCommand displaycontact = new SqlCommand(query, sqlConnection);
+
+                SqlDataReader reader = displaycontact.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Contact contact = new Contact()
+                    {
+                        Id = (int)reader["Id"],
+                        Name = (string)reader["CName"],
+                        PhoneNumber = (string)reader["Phone_Number"],
+                        Email = (string)reader["Email"],
+                        State = (string)reader["CState"],
+                        City = (string)reader["City"],
+                        ZipCode = (string)reader["ZipCode"],
+                    };
+
+                    contacts.Add(contact);
+                }
+
+                foreach(Contact contact in contacts)
+                {
+                    Console.WriteLine($"id: {contact.Id}\t CName: {contact.Name}\t Phone_Number: {contact.PhoneNumber}\t Email: {contact.Email}\t CState: {contact.State}\t City: {contact.City}\t ZipCode: {contact.ZipCode}");
+                }
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
+            finally
+            {
+                sqlConnection.Close();
+            }
         }
 
     }

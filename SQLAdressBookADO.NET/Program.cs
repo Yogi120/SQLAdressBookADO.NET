@@ -14,7 +14,8 @@ public class Program
             Console.WriteLine("3. Display Contact");
             Console.WriteLine("4. Delete Contact");
             Console.WriteLine("5. Add Contact by Stored Procedure");
-            Console.WriteLine("6. exit");
+            Console.WriteLine("6. Displaying all contacts");
+            Console.WriteLine("7. exit");
 
             Console.Write("Enter Choices: ");
             int Choice = int.Parse(Console.ReadLine());
@@ -84,8 +85,14 @@ public class Program
 
                     break;
 
-
                 case 6:
+
+                    Console.WriteLine("Displaying All contact !!!");
+                    Method.SpDisplayContacts();
+
+                    break;
+
+                case 7:
 
                     Console.WriteLine("Exiting...");
                     return;
